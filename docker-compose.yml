@@ -1,0 +1,14 @@
+services:
+  frontendvuejs:
+    container_name: vuejs
+    build:
+      context: .
+      dockerfile: docker/vuejs/Dockerfile
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "8800:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev -- --host 0.0.0.0
