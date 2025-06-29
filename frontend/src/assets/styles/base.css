@@ -1,0 +1,54 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-family: 'Raleway', sans-serif;
+    --background-website: #FFF;
+    --color-primary: #0065FC;
+    --color-secondary: #DEEBFF;
+    --color-tertiary: #F2F2F2;
+    --color-text-one: #FFF;
+    --color-text-two: #000;
+
+    --border-radius-full-top: 12px 12px 0 0;
+    --border-radius-full-left: 12px 0 0 12px;
+    --border-round-full-left: 12px 0 0 12px;
+    --border-round-full-right: 0 12px 12px 0;
+    --border-radius-medium: 16px;
+}
+
+::placeholder {
+    opacity: 1;
+}
+
+/* General */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Utils */
+
+.container {
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    max-width: 1400px;
+}
