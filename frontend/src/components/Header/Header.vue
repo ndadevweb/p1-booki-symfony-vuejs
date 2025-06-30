@@ -1,6 +1,5 @@
 <script setup>
-import logo from '@/assets/images/logo/booki.png'
-import Navigation from '@/components/Navigation/Navigation.vue'
+    import logo from '@/assets/images/logo/booki.png'
 </script>
 
 <template>
@@ -14,7 +13,7 @@ import Navigation from '@/components/Navigation/Navigation.vue'
             <p>En plein centre ville ou en pleine nature</p>
         </div>
 
-        <Navigation />
+        <slot name="navigation" />
     </header>
 </template>
 
