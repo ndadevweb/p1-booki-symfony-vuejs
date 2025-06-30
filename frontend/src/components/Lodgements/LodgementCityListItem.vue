@@ -1,11 +1,13 @@
 <script setup>
+import Rating from '@/components/Rating/Rating.vue'
+
 defineProps({
     url: String,
     imageSource: String,
     imageTextAlt: String,
     title: String,
     price: String,
-    ranking: Number
+    rating: Number
 })
 </script>
 
@@ -18,13 +20,7 @@ defineProps({
                 <h4 class="card-heading">{{ title }}</h4>
                 <p class="card-price">Nuit à partir de <b>{{ price }}</b></p>
 
-                <div class="card-stars">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star empty"></i>
-                </div>
+                <Rating :rating="rating" />
             </div>
         </a>
     </article>

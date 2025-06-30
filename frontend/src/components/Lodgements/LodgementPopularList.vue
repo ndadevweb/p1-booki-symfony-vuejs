@@ -9,7 +9,7 @@
             imageTextAlt: 'Draft',
             title: 'Hôtel Le soleil du matin',
             price: '128€',
-            ranking: 5
+            rating: 5
         },
         {
             id: '2',
@@ -18,7 +18,7 @@
             imageTextAlt: 'Draft',
             title: "Au coeur de l'eau Chambres d'hôtes",
             price: '71€',
-            ranking: 4
+            rating: 4
         },
         {
             id: '3',
@@ -27,7 +27,7 @@
             imageTextAlt: 'Draft',
             title: 'Hôtel Tout bleu et Blanc',
             price: '68€',
-            ranking: 4
+            rating: 4
         }
     ]
 </script>
@@ -45,7 +45,7 @@
                 :imageTextAlt="lodgementPopular.imageTextAlt"
                 :title="lodgementPopular.title"
                 :price="lodgementPopular.price"
-                :ranking="lodgementPopular.ranking"
+                :rating="lodgementPopular.rating"
             />
         </div>
     </section>

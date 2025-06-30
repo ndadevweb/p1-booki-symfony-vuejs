@@ -1,5 +1,5 @@
 <script setup>
-    import LodgementCityListItem from '@/components/Lodgements/LodgementCityListItem.vue';
+    import LodgementCityListItem from '@/components/Lodgements/LodgementCityListItem.vue'
 
     const lodgementsCity = [
         {
@@ -9,7 +9,7 @@
             imageTextAlt: 'Draft',
             title: 'Auberge La Cannbière',
             price: '25€',
-            ranking: 4
+            rating: 4
         },
         {
             id: '2',
@@ -18,7 +18,7 @@
             imageTextAlt: 'Draft',
             title: 'Hôtel du port',
             price: '52€',
-            ranking: 5
+            rating: 5
         },
         {
             id: '3',
@@ -27,7 +27,7 @@
             imageTextAlt: 'Draft',
             title: 'Hôtel Les mouettes',
             price: '76€',
-            ranking: 4
+            rating: 4
         },
         {
             id: '4',
@@ -36,7 +36,7 @@
             imageTextAlt: 'Draft',
             title: 'Hôtel de la mer',
             price: '46€',
-            ranking: 3
+            rating: 3
         },
         {
             id: '5',
@@ -45,7 +45,7 @@
             imageTextAlt: 'Draft',
             title: 'Auberge Le Panier',
             price: '23€',
-            ranking: 4
+            rating: 4
         },
         {
             id: '6',
@@ -54,7 +54,7 @@
             imageTextAlt: 'Draft',
             title: 'Hôtel chez Amina',
             price: '96€',
-            ranking: 5
+            rating: 5
         }
     ]
 </script>
@@ -72,7 +72,7 @@
                 :imageTextAlt="lodgementCity.imageTextAlt"
                 :title="lodgementCity.title"
                 :price="lodgementCity.price"
-                :ranking="lodgementCity.ranking"
+                :rating="lodgementCity.rating"
             />
         </div>
     </section>
