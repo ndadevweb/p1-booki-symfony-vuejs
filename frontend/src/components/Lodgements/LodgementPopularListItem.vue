@@ -27,7 +27,7 @@ defineProps({
 </template>
 
 <style scoped>
-.lodgments-popular-card {
+.lodgments-popular-card:not(:last-child) {
     margin-bottom: var(--gap);
 }
 </style>

@@ -75,6 +75,8 @@
                 :rating="lodgementCity.rating"
             />
         </div>
+
+        <button type="button" class="show-more cursor-pointer">Afficher plus</button>
     </section>
 </template>
 
@@ -95,5 +97,19 @@
     display: flex;
     flex-flow: row wrap;
     gap: var(--gap);
+}
+
+.show-more {
+    border: none;
+    background: none;
+    align-self: flex-start;
+    margin: auto 0 5px 0;
+    font: 700 18px var(--font-family);
+    color: var(--color-text-two);
+    transition: .25s;
+}
+
+.show-more:hover {
+    color: var(--color-primary);
 }
 </style>
