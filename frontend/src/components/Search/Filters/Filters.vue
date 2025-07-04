@@ -1,12 +1,8 @@
 <script setup>
+import { useLodgementsFilterStore } from '@/stores/lodgementsFilter';
 import Filter from '@/components/Search/Filters/Filter.vue'
 
-const filters = [
-    { id: 1, icon: "fa-money-bill-wave", title: "Économique" },
-    { id: 2, icon: "fa-child-reaching", title: "Familial" },
-    { id: 3, icon: "fa-heart", title: "Romantique" },
-    { id: 4, icon: "fa-dog", title: "Animaux autorisés" }
-]
+const filtersStore = useLodgementsFilterStore()
 </script>
 
 <template>
@@ -15,11 +11,13 @@ const filters = [
 
         <div class="search-filters-items">
             <Filter
-                v-for="filter in filters"
+                v-if="filtersStore.filtersList.length"
+                v-for="filter in filtersStore.filtersList"
                 :key="filter.id"
                 :icon="filter.icon"
                 :title="filter.title"
             />
+            <div v-else>CHARGEMENT DES FILTRES</div>
         </div>
     </div>
 </template>

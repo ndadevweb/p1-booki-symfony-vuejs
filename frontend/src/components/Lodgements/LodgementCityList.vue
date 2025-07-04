@@ -1,82 +1,69 @@
 <script setup>
-    import LodgementCityListItem from '@/components/Lodgements/LodgementCityListItem.vue'
+import { onMounted, ref, watch } from 'vue'
+import { fetchLodgementsCity } from '@/api/lodgementsCity.api'
+import { useLodgementsCityStore } from '@/stores/lodgementsCity'
 
-    const lodgementsCity = [
-        {
-            id: '1',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Auberge La Cannbière',
-            price: '25€',
-            rating: 4
-        },
-        {
-            id: '2',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Hôtel du port',
-            price: '52€',
-            rating: 5
-        },
-        {
-            id: '3',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Hôtel Les mouettes',
-            price: '76€',
-            rating: 4
-        },
-        {
-            id: '4',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Hôtel de la mer',
-            price: '46€',
-            rating: 3
-        },
-        {
-            id: '5',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Auberge Le Panier',
-            price: '23€',
-            rating: 4
-        },
-        {
-            id: '6',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Hôtel chez Amina',
-            price: '96€',
-            rating: 5
+// DEV Only
+import { fetchLodgementsCityMock } from '@/mocks/lodgementsCityData'
+//
+
+import LodgementCityListItem from '@/components/Lodgements/LodgementCityListItem.vue'
+
+const page = ref(1)
+const lodgementsCityStore = useLodgementsCityStore()
+
+onMounted(async () => {
+    lodgementsCityStore.loading = true
+    const data = await fetchLodgementsCityMock({ page: 1 })
+    lodgementsCityStore.setLodgementsCity(data)
+    lodgementsCityStore.loading = false
+})
+
+watch(
+    () => lodgementsCityStore.lodgementsCityName,
+    async (newLocation) => {
+        let data = {}
+        page.value = 1
+        lodgementsCityStore.loading = true
+        lodgementsCityStore.lodgementsCityList = []
+        if (newLocation && newLocation.trim() !== '') {
+            data = await fetchLodgementsCityMock({ page: 1, location: newLocation })
+        } else {
+            data = await fetchLodgementsCityMock({ page: 1 })
         }
-    ]
+        lodgementsCityStore.setLodgementsCity(data)
+        lodgementsCityStore.loading = false
+    }
+)
+
+const showMoreItems = async () => {
+    page.value += 1
+    const data = await fetchLodgementsCityMock({ page: page.value, location: lodgementsCityStore.lodgementsCityName || '' })
+    lodgementsCityStore.appendLodgementsCity(data)
+}
+
 </script>
 
 <template>
     <section id="hebergements" class="lodgments-city">
-        <h3 class="heading-section">Hébergements à Marseille</h3>
+        <h3 class="heading-section" v-if="lodgementsCityStore.loading">Chargement...</h3>
+        <h3 class="heading-section" v-else>{{ lodgementsCityStore.lodgementsCityWhere }}</h3>
 
         <div class="lodgments-city-cards">
             <LodgementCityListItem
-                v-for="lodgementCity in lodgementsCity"
+                v-for="lodgementCity in lodgementsCityStore.lodgementsCityList"
                 :key="lodgementCity.id"
                 :url="lodgementCity.url"
                 :imageSource="lodgementCity.imageSource"
                 :imageTextAlt="lodgementCity.imageTextAlt"
                 :title="lodgementCity.title"
                 :price="lodgementCity.price"
-                :rating="lodgementCity.rating"
-            />
+                :rating="lodgementCity.rating" />
         </div>
 
-        <button type="button" class="show-more cursor-pointer">Afficher plus</button>
+        <button type="button" class="show-more cursor-pointer" :class="{ 'show-more-disabled': loading }"
+            v-on:click="showMoreItems()" v-if="lodgementsCityStore.lodgementsCityList.length > 0"
+            :disabled="loading === true">Afficher plus</button>
     </section>
 </template>
 
@@ -97,13 +84,14 @@
     display: flex;
     flex-flow: row wrap;
     gap: var(--gap);
+    margin-bottom: 42px;
 }
 
 .show-more {
     border: none;
     background: none;
     align-self: flex-start;
-    margin: auto 0 5px 0;
+    /* margin: auto 0 5px 0; */
     font: 700 18px var(--font-family);
     color: var(--color-text-two);
     transition: .25s;
@@ -111,5 +99,10 @@
 
 .show-more:hover {
     color: var(--color-primary);
+}
+
+.show-more-disabled {
+    cursor: not-allowed;
+    opacity: .5;
 }
 </style>

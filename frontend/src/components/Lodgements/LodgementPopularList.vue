@@ -1,35 +1,43 @@
 <script setup>
-    import LodgementPopularListItem from '@/components/Lodgements/LodgementPopularListItem.vue'
+import { onMounted, ref, watch } from 'vue'
+import { fetchLodgementsPopular } from '@/api/lodgementsPopular.api'
+import { useLodgementsPopularStore } from '@/stores/lodgementsPopular'
+import { useLodgementsCityStore } from '@/stores/lodgementsCity'
 
-    const lodgementsPopular = [
-        {
-            id: '1',
-            url : '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Hôtel Le soleil du matin',
-            price: '128€',
-            rating: 5
-        },
-        {
-            id: '2',
-            url : '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: "Au coeur de l'eau Chambres d'hôtes",
-            price: '71€',
-            rating: 4
-        },
-        {
-            id: '3',
-            url : '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Hôtel Tout bleu et Blanc',
-            price: '68€',
-            rating: 4
+// DEV Only
+import { fetchLodgementsPopularMock } from '@/mocks/lodgementsPopularData'
+//
+import LodgementPopularListItem from '@/components/Lodgements/LodgementPopularListItem.vue'
+
+const lodgementsPopularStore = useLodgementsPopularStore()
+const lodgementsCityStore = useLodgementsCityStore()
+
+onMounted(async () => {
+    lodgementsPopularStore.loading = true
+    const location = lodgementsCityStore.lodgementsCityName
+    const data = await fetchLodgementsPopularMock({ location })
+    lodgementsPopularStore.setLodgementsPopular(data)
+    lodgementsPopularStore.loading = false
+})
+
+watch(
+    () => lodgementsCityStore.lodgementsCityName,
+    async (newLocation) => {
+        let data = {}
+        lodgementsPopularStore.loading = true
+        lodgementsPopularStore.setLodgementsPopular([])
+
+        if (newLocation && newLocation.trim() !== '') {
+            data = await fetchLodgementsPopularMock({ location: newLocation.trim() })
+        } else {
+            data = await fetchLodgementsPopularMock({ location: '' })
         }
-    ]
+
+        lodgementsPopularStore.setLodgementsPopular(data)
+        lodgementsPopularStore.loading = false
+    }
+)
+
 </script>
 
 <template>
@@ -38,7 +46,7 @@
 
         <div class="lodgments-popular-cards">
             <LodgementPopularListItem
-                v-for="lodgementPopular in lodgementsPopular"
+                v-for="lodgementPopular in lodgementsPopularStore.lodgementsPopularList"
                 :key="lodgementPopular.id"
                 :url="lodgementPopular.url"
                 :imageSource="lodgementPopular.imageSource"

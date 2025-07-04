@@ -1,0 +1,58 @@
+{
+    "where": "Hébergements à Marseille",
+    "items": [{
+        "id": "1",
+        "url": "",
+        "imageSource": "/draft750x500.png",
+        "imageTextAlt": "Draft",
+        "title": "Auberge La Cannbière",
+        "price": "25€",
+        "rating": "4"
+    },
+    {
+        "id": "2",
+        "url": "",
+        "imageSource": "/draft750x500.png",
+        "imageTextAlt": "Draft",
+        "title": "Hôtel du port",
+        "price": "52€",
+        "rating": "5"
+    },
+    {
+        "id": "3",
+        "url": "",
+        "imageSource": "/draft750x500.png",
+        "imageTextAlt": "Draft",
+        "title": "Hôtel Les mouettes",
+        "price": "76€",
+        "rating": "4"
+    },
+    {
+        "id": "4",
+        "url": "",
+        "imageSource": "/draft750x500.png",
+        "imageTextAlt": "Draft",
+        "title": "Hôtel de la mer",
+        "price": "46€",
+        "rating": "3"
+    },
+    {
+        "id": "5",
+        "url": "",
+        "imageSource": "/draft750x500.png",
+        "imageTextAlt": "Draft",
+        "title": "Auberge Le Panier",
+        "price": "23€",
+        "rating": "4"
+    },
+    {
+        "id": "6",
+        "url": "",
+        "imageSource": "/draft750x500.png",
+        "imageTextAlt": "Draft",
+        "title": "Hôtel chez Amina",
+        "price": "96€",
+        "rating": "5"
+    }],
+    "total": 5
+}

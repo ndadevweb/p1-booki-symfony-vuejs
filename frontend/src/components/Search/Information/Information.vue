@@ -1,13 +1,30 @@
 <script setup>
-defineProps({
-    message: String
+import { useLodgementsCityStore } from '@/stores/lodgementsCity'
+import { computed } from 'vue'
+
+const lodgementsCityStore = useLodgementsCityStore()
+const message = computed(() => {
+    const total = lodgementsCityStore.lodgementsCityTotal
+
+    if (total === 0) {
+        return "Aucun logement disponible dans cette ville"
+    } else if (total === 1) {
+        return "1 seul logement est disponible dans cette ville"
+    } else {
+        return `Plus de ${total} logements sont disponibles dans cette ville`
+    }
 })
 </script>
 
 <template>
     <p class="search-information-message">
         <span class="information-icon"><i class="fa-solid fa-info full-center"></i></span>
-        {{ message }}
+        <template v-if="lodgementsCityStore.loading == true">
+            Calcul en cours...
+        </template>
+        <template v-else>
+            {{ message }}
+        </template>
     </p>
 </template>
 

@@ -1,0 +1,29 @@
+[
+    {
+        "id": "1",
+        "url": "",
+        "imageSource": "/draft750x500.png",
+        "imageTextAlt": "Draft",
+        "title": "Hôtel Le soleil du matin",
+        "price": "128€",
+        "rating": "5"
+    },
+    {
+        "id": "2",
+        "url": "",
+        "imageSource": "/draft750x500.png",
+        "imageTextAlt": "Draft",
+        "title": "Au coeur de l'eau Chambres d'hôtes",
+        "price": "71€",
+        "rating": "4"
+    },
+    {
+        "id": "3",
+        "url": "",
+        "imageSource": "/draft750x500.png",
+        "imageTextAlt": "Draft",
+        "title": "Hôtel Tout bleu et Blanc",
+        "price": "68€",
+        "rating": "4"
+    }
+]

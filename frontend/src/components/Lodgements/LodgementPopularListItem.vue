@@ -7,7 +7,7 @@ defineProps({
     imageTextAlt: String,
     title: String,
     price: String,
-    rating: Number
+    rating: String
 })
 </script>
 

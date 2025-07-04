@@ -1,0 +1,6 @@
+[
+    { "id": "1", "icon": "fa-money-bill-wave", "title": "Économique" },
+    { "id": "2", "icon": "fa-child-reaching", "title": "Familial" },
+    { "id": "3", "icon": "fa-heart", "title": "Romantique" },
+    { "id": "4", "icon": "fa-dog", "title": "Animaux autorisés" }
+]

@@ -8,7 +8,7 @@ import Information from '@/components/Search/Information/Information.vue'
     <aside class="container search">
         <Form />
         <Filters />
-        <Information message="Plus de 500 logements sont disponibles dans cette ville" />
+        <Information />
     </aside>
 </template>
 

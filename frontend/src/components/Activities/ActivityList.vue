@@ -1,65 +1,57 @@
 <script setup>
-    import ActivityListItem from '@/components/Activities/ActivityListItem.vue'
+import { onMounted, ref, watch } from 'vue'
+import { fetchActivitiesCity } from '@/api/activitiesCity.api'
+import { useActivitiesStore } from '@/stores/activities.js'
+import { useLodgementsCityStore } from '@/stores/lodgementsCity'
 
-    const activities = [
-        {
-            id: '1',
-            customClass: 'card-full',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Vieux Port'
-        },
-        {
-            id: '2',
-            customClass: 'card-medium-2',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Fort de Pomègues'
-        },
-        {
-            id: '3',
-            customClass: 'card-small-1',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Îles du Frioul'
-        },
-        {
-            id: '4',
-            customClass: 'card-full',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Parc National des Calanques'
-        },
-        {
-            id: '5',
-            customClass: 'card-small-2',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Notre-Dame-de-la-Garde'
-        },
-        {
-            id: '6',
-            customClass: 'card-medium-1',
-            url: '',
-            imageSource: '/draft750x500.png',
-            imageTextAlt: 'Draft',
-            title: 'Parc Longchamps'
-        },
-    ]
+// DEV Only
+import { fetchActivitiesMock } from '@/mocks/activitiesData'
+//
+
+import ActivityListItem from '@/components/Activities/ActivityListItem.vue'
+
+const activitiesStore = useActivitiesStore()
+const lodgementsCityStore = useLodgementsCityStore()
+
+onMounted(async () => {
+    activitiesStore.loading = true
+    const location = lodgementsCityStore.lodgementsCityName
+    const data = await fetchActivitiesMock({ location })
+    activitiesStore.setActivities(data)
+    activitiesStore.setActivitiesTitle(data.title)
+    activitiesStore.loading = false
+})
+
+watch(
+    () => lodgementsCityStore.lodgementsCityName,
+    async (newLocation) => {
+        let data = {}
+        activitiesStore.loading = true
+        activitiesStore.setActivities([])
+        activitiesStore.setActivitiesTitle('')
+
+        if (newLocation && newLocation.trim() !== '') {
+            data = await fetchActivitiesMock({ location: newLocation })
+        } else {
+            data = await fetchActivitiesMock({ location: '' })
+        }
+
+        activitiesStore.setActivities(data)
+        activitiesStore.setActivitiesTitle(data?.title)
+        activitiesStore.loading = false
+    }
+)
 </script>
 
 <template>
     <section id="activites" class="container activities">
-        <h3 class="heading-section">Activités à Marseille</h3>
+        <h3 class="heading-section" v-if="activitiesStore.loading === false && activitiesStore.activitiesTitle !== null">{{ activitiesStore.activitiesTitle }}</h3>
+        <h3 class="heading-section" v-else-if="activitiesStore.loading === false && lodgementsCityStore.lodgementsCityName !== null">Activités à {{ lodgementsCityStore.lodgementsCityName }}</h3>
+        <h3 class="heading-section" v-else>Chargement...</h3>
 
         <div class="activities-cards">
             <ActivityListItem
-                v-for="activity in activities"
+                v-for="activity in activitiesStore.activitiesList"
                 :key="activity.id"
                 :customClass="activity.customClass"
                 :url="activity.url"

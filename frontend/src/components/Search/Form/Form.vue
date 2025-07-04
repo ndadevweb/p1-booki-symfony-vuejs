@@ -1,11 +1,20 @@
 <script setup>
+import { ref } from 'vue'
+import { useLodgementsCityStore } from '@/stores/lodgementsCity'
 
+const searchInput = ref('')
+const lodgementsCityStore = useLodgementsCityStore()
+
+const submitSearch = () => {
+    const newLocation = searchInput.value.trim() || null
+    lodgementsCityStore.setCityName(newLocation)
+}
 </script>
 
 <template>
-    <form class="search-form">
+    <form class="search-form" v-on:submit.prevent="submitSearch">
         <label for="search-field" class="cursor-pointer"><i class="fa-solid fa-location-dot full-center"></i></label>
-        <input type="search" name="search" id="search-field" placeholder="Marseille, France" />
+        <input type="search" name="search" id="search-field" placeholder="Marseille, France" v-model="searchInput" />
         <button type="submit" class="cursor-pointer">
             <i class="fas fa-search"></i>
             <span>Rechercher</span>
