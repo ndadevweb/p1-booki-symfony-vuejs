@@ -1,13 +1,18 @@
 <script setup>
-const props = defineProps({
-  icon: String,
-  title: String
+import { useLodgementsFilterStore } from '@/stores/lodgementsFilter'
+
+defineProps({
+    id: String,
+    icon: String,
+    title: String
 })
+
+const filtersStore = useLodgementsFilterStore()
 </script>
 
 <template>
     <label class="search-filters-item cursor-pointer">
-        <input type="checkbox" class="sr-only" />
+        <input type="checkbox" class="sr-only" v-on:change="filtersStore.toggle(id)" />
         <span class="search-filters-item-icon">
             <i :class="['fa-solid', icon, 'full-center']"></i>
         </span>

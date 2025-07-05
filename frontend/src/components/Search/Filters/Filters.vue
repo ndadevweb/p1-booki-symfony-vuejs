@@ -14,6 +14,7 @@ const filtersStore = useLodgementsFilterStore()
                 v-if="filtersStore.filtersList.length"
                 v-for="filter in filtersStore.filtersList"
                 :key="filter.id"
+                :id="filter.id"
                 :icon="filter.icon"
                 :title="filter.title"
             />

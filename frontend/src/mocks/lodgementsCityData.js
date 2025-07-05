@@ -1,94 +1,3 @@
-// function uuidv4() {
-//     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-//         const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8)
-//         return v.toString(16)
-//     })
-// }
-
-// const TITLES = [
-//     'Auberge du Vieux Port',
-//     'Hôtel Bleu',
-//     'Le Panier Secret',
-//     'Chez Amina',
-//     'Les Mouettes',
-//     'Villa Marine',
-//     'Le Canebière Chic',
-//     'Studio Central',
-//     'Résidence du Sud',
-//     'Maison Calanques',
-//     'Petit Coin Bleu',
-//     'Appartement Lumière',
-//     'Chambre Soleil',
-//     'Suite Méditerranée',
-//     'Oasis Marseille'
-// ]
-
-// function randomTitle() {
-//     const t = TITLES[Math.floor(Math.random() * TITLES.length)]
-
-//     return t
-// }
-
-// function randomPrice() {
-//     return `${Math.floor(Math.random() * 101) + 20}€`
-// }
-
-// function randomRating() {
-//     return (Math.floor(Math.random() * 5) + 1).toString()
-// }
-
-// function generateLodgements() {
-//     const lodgements = []
-//     let count = 0
-//     for (let page = 1; page <= 5; page++) {
-//         const nb = (page < 5) ? 6 : 4
-//         for (let i = 0; i < nb; i++) {
-//             count++
-//             lodgements.push({
-//                 id: uuidv4(),
-//                 url: "",
-//                 imageSource: "/draft750x500.png",
-//                 imageTextAlt: "Draft",
-//                 title: randomTitle(),
-//                 price: randomPrice(),
-//                 rating: randomRating()
-//             })
-//         }
-//     }
-//     return lodgements
-// }
-
-// const lodgementsCityRaw = generateLodgements()
-// const PAGE_SIZE = 6
-
-// export function getLodgementsCityData(page = 1, location = "Marseille") {
-//     const total = lodgementsCityRaw.length
-//     const startIndex = (page - 1) * PAGE_SIZE
-//     const items = lodgementsCityRaw.slice(startIndex, startIndex + PAGE_SIZE)
-//     return {
-//         page,
-//         items,
-//         location: `Hébergements à ${location}`,
-//         total
-//     }
-// }
-
-// export function fetchLodgementsCityMock({ page = 1, location = "Marseille", signal } = {}) {
-//     return new Promise((resolve, reject) => {
-//         const timer = setTimeout(() => {
-//             resolve(getLodgementsCityData(page, location))
-//         }, 1500)
-//         if (signal) {
-//             signal.addEventListener('abort', () => {
-//                 clearTimeout(timer)
-//                 reject(new Error('Request aborted'))
-//             })
-//         }
-//     })
-// }
-
-
-// V2
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
         const r = Math.random() * 16 | 0,
@@ -150,9 +59,20 @@ function generateLodgementsForCity(city) {
             title,
             price: randomPrice(),
             rating: randomRating(),
+            filters: randomUniqueFilters()
         });
     }
     return lodgements;
+}
+
+function randomUniqueFilters() {
+    const possible = [1, 2, 3, 4]
+    const count = Math.floor(Math.random() * 4) + 1
+    const shuffled = possible
+        .slice()
+        .sort(() => Math.random() - 0.5)
+
+    return shuffled.slice(0, count)
 }
 
 const ALL_LODGEMENTS = {};

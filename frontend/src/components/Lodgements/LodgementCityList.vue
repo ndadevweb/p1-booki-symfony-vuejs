@@ -2,6 +2,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { fetchLodgementsCity } from '@/api/lodgementsCity.api'
 import { useLodgementsCityStore } from '@/stores/lodgementsCity'
+import { useLodgementsFilterStore } from '@/stores/lodgementsFilter'
 
 // DEV Only
 import { fetchLodgementsCityMock } from '@/mocks/lodgementsCityData'
@@ -11,6 +12,7 @@ import LodgementCityListItem from '@/components/Lodgements/LodgementCityListItem
 
 const page = ref(1)
 const lodgementsCityStore = useLodgementsCityStore()
+const filtersStore = useLodgementsFilterStore()
 
 onMounted(async () => {
     lodgementsCityStore.loading = true
@@ -52,6 +54,7 @@ const showMoreItems = async () => {
         <div class="lodgments-city-cards">
             <LodgementCityListItem
                 v-for="lodgementCity in lodgementsCityStore.lodgementsCityList"
+                v-show="filtersStore.isMatch(lodgementCity.filters) === true"
                 :key="lodgementCity.id"
                 :url="lodgementCity.url"
                 :imageSource="lodgementCity.imageSource"
