@@ -28,6 +28,6 @@ defineProps({
 
 <style scoped>
 .lodgments-popular-card:not(:last-child) {
-    margin-bottom: var(--gap);
+    margin-bottom: 30px;
 }
 </style>

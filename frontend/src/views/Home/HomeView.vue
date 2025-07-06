@@ -26,8 +26,12 @@ useStoreSync(lodgementsFilters, lodgementsFiltersLoading, lodgementsFiltersError
 
 <style scoped>
 .lodgments {
-    display: flex;
-    column-gap: 40px;
+    --min: 265px;
+    display: grid;
+    grid-template-columns: minmax(var(--min), 880px) minmax(var(--min), 420px);
+    grid-template-rows: max-content;
+
+    gap: 40px;
     margin-top: 40px;
     padding: 0 30px;
 }

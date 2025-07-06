@@ -60,15 +60,16 @@ watch(
 </template>
 
 <style scoped>
-.lodgments-popular {
-    --gap: 30px;
-    flex: 0 1 420px;
-    padding-bottom: 5px;
 
+.lodgments-popular {
     padding: 40px;
+    padding-bottom: 5px;
     background: var(--color-tertiary);
     border-radius: var(--border-radius-medium);
     min-height: 625px;
+
+    display: grid;
+    grid-template-rows: min-content;
 }
 
 .lodgments-popular-heading {

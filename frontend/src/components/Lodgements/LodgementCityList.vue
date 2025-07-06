@@ -73,10 +73,9 @@ const showMoreItems = async () => {
 <style scoped>
 .lodgments-city {
     --gap: 30px;
-    display: flex;
-    flex-direction: column;
-    flex: 0 1 880px;
-
+    display: grid;
+    grid-template-rows: auto 1fr 65px;
+    align-content: start;
     padding: 40px;
     background: var(--color-tertiary);
     border-radius: var(--border-radius-medium);
@@ -84,20 +83,23 @@ const showMoreItems = async () => {
 }
 
 .lodgments-city-cards {
-    display: flex;
-    flex-flow: row wrap;
-    gap: var(--gap);
-    margin-bottom: 42px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-rows: min-content;
+    gap: 30px;
 }
 
 .show-more {
     border: none;
     background: none;
-    align-self: flex-start;
-    /* margin: auto 0 5px 0; */
+    
+    align-self: end;
+    justify-self: start;
+
     font: 700 18px var(--font-family);
     color: var(--color-text-two);
     transition: .25s;
+    padding-bottom: 5px;
 }
 
 .show-more:hover {
