@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, computed } from 'vue'
 import { fetchLodgementsCity } from '@/api/lodgementsCity.api'
 import { useLodgementsCityStore } from '@/stores/lodgementsCity'
 import { useLodgementsFilterStore } from '@/stores/lodgementsFilter'
@@ -40,15 +40,21 @@ watch(
 
 const showMoreItems = async () => {
     page.value += 1
+    lodgementsCityStore.loading = true
     const data = await fetchLodgementsCityMock({ page: page.value, location: lodgementsCityStore.lodgementsCityName || '' })
     lodgementsCityStore.appendLodgementsCity(data)
+    lodgementsCityStore.loading = false
 }
+
+const isLoading = computed(() => lodgementsCityStore.loading === true)
+
+const hasLodgements = computed(() => lodgementsCityStore.lodgementsCityList.length > 0)
 
 </script>
 
 <template>
     <section id="hebergements" class="lodgments-city">
-        <h3 class="heading-section" v-if="lodgementsCityStore.loading">Chargement...</h3>
+        <h3 class="heading-section" v-if="isLoading">Chargement...</h3>
         <h3 class="heading-section" v-else>{{ lodgementsCityStore.lodgementsCityWhere }}</h3>
 
         <div class="lodgments-city-cards">
@@ -64,9 +70,12 @@ const showMoreItems = async () => {
                 :rating="lodgementCity.rating" />
         </div>
 
-        <button type="button" class="show-more cursor-pointer" :class="{ 'show-more-disabled': loading }"
-            v-on:click="showMoreItems()" v-if="lodgementsCityStore.lodgementsCityList.length > 0"
-            :disabled="loading === true">Afficher plus</button>
+        <button
+            v-if="hasLodgements"
+            type="button" class="show-more cursor-pointer"
+            :class="{ 'show-more-disabled': isLoading }"
+            v-on:click="showMoreItems()"
+            :disabled="isLoading">Afficher plus</button>
     </section>
 </template>
 
