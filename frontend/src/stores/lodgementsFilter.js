@@ -36,6 +36,10 @@ export const useLodgementsFilterStore = defineStore('filters', () => {
         return filtersCheckedString.every(id => filtersIDString.includes(id)) === true
     }
 
+    function resetChecked() {
+        filtersChecked.value = []
+    }
+
     return {
         filtersList,
         filtersChecked,
@@ -44,6 +48,7 @@ export const useLodgementsFilterStore = defineStore('filters', () => {
         setFilters,
         toggle,
         isChecked,
-        isMatch
+        isMatch,
+        resetChecked
     }
 })

@@ -1,13 +1,21 @@
 <script setup>
 import { ref } from 'vue'
 import { useLodgementsCityStore } from '@/stores/lodgementsCity'
+import { useLodgementsFilterStore } from '@/stores/lodgementsFilter'
 
 const searchInput = ref('')
 const lodgementsCityStore = useLodgementsCityStore()
+const filtersStore = useLodgementsFilterStore()
 
 const submitSearch = () => {
     const newLocation = searchInput.value.trim() || null
     lodgementsCityStore.setCityName(newLocation)
+}
+
+const resetSearch = () => {
+    searchInput.value = ''
+    lodgementsCityStore.setCityName('')
+    filtersStore.resetChecked()
 }
 </script>
 
@@ -19,6 +27,7 @@ const submitSearch = () => {
             <i class="fas fa-search"></i>
             <span>Rechercher</span>
         </button>
+        <button type="button" class="reset cursor-pointer" v-on:click="resetSearch">Réinitialiser</button>
     </form>
 </template>
 
@@ -72,6 +81,15 @@ const submitSearch = () => {
     box-shadow: inset 0 0 0 var(--color-primary);
     transition: .25s;
 }
+
+
+.search-form button.reset {
+    border-radius: 16px;
+    margin-left: 1px;
+}
+
+
+
 
 .search-form button .fa-search {
     display: none;

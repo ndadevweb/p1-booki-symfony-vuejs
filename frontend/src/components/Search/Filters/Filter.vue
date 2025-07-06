@@ -4,7 +4,8 @@ import { useLodgementsFilterStore } from '@/stores/lodgementsFilter'
 defineProps({
     id: String,
     icon: String,
-    title: String
+    title: String,
+    checked: Boolean
 })
 
 const filtersStore = useLodgementsFilterStore()
@@ -12,7 +13,7 @@ const filtersStore = useLodgementsFilterStore()
 
 <template>
     <label class="search-filters-item cursor-pointer">
-        <input type="checkbox" class="sr-only" v-on:change="filtersStore.toggle(id)" />
+        <input type="checkbox" class="sr-only" v-on:change="filtersStore.toggle(id)" :checked="checked" />
         <span class="search-filters-item-icon">
             <i :class="['fa-solid', icon, 'full-center']"></i>
         </span>

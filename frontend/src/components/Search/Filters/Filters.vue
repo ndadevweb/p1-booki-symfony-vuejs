@@ -17,6 +17,7 @@ const filtersStore = useLodgementsFilterStore()
                 :id="filter.id"
                 :icon="filter.icon"
                 :title="filter.title"
+                :checked="filtersStore.isChecked(filter.id)"
             />
             <div v-else>CHARGEMENT DES FILTRES</div>
         </div>
@@ -44,46 +45,4 @@ const filtersStore = useLodgementsFilterStore()
     flex-flow: row wrap;
     gap: 10px 25px;
 }
-
-
-
-/*
-.search-filters-item {
-    display: flex;
-    align-items: center;
-    padding: 0 20px 0 0;
-    height: var(--size-search-elements);
-    background: var(--color-text-one);
-    border: 3px solid var(--color-tertiary);
-    border-radius: var(--size-search-elements);
-    transform: scale(1);
-    transition: .25s;
-}
-
-.search-filters-item:hover {
-    border-color: var(--color-secondary);
-    color: var(--color-primary);
-    transform: scale(1.05);
-}
-
-.search-filters-item-icon {
-    flex-shrink: 0;
-    width: calc(var(--size-search-elements) + 0px);
-    height: calc(var(--size-search-elements) + 0px);
-    position: relative;
-    margin: 0 11px 0 -4px;
-    background: var(--color-secondary);
-    border-radius: var(--size-search-elements);
-}
-
-.search-filters-item-icon i {
-    color: var(--color-primary);
-    font-size: 18px;
-}
-
-.search-filters-item-text {
-    font: 600 16px var(--font-family);
-    white-space: nowrap;
-}
-*/
 </style>
