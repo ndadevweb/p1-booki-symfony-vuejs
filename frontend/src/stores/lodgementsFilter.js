@@ -40,6 +40,10 @@ export const useLodgementsFilterStore = defineStore('filters', () => {
         filtersChecked.value = []
     }
 
+    function hasChecked() {
+        return filtersChecked.value.length > 0
+    }
+
     return {
         filtersList,
         filtersChecked,
@@ -49,6 +53,7 @@ export const useLodgementsFilterStore = defineStore('filters', () => {
         toggle,
         isChecked,
         isMatch,
-        resetChecked
+        resetChecked,
+        hasChecked
     }
 })

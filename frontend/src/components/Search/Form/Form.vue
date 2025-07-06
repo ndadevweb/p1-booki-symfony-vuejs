@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useLodgementsCityStore } from '@/stores/lodgementsCity'
 import { useLodgementsFilterStore } from '@/stores/lodgementsFilter'
 
@@ -13,21 +13,70 @@ const submitSearch = () => {
 }
 
 const resetSearch = () => {
-    searchInput.value = ''
-    lodgementsCityStore.setCityName('')
-    filtersStore.resetChecked()
+    if (filtersStore.hasChecked() === true) {
+        filtersStore.resetChecked()
+    }
+
+    if (lodgementsCityStore.lodgementsCityName !== null && lodgementsCityStore.lodgementsCityName !== '') {
+        searchInput.value = ''
+        lodgementsCityStore.setCityName('')
+    }
 }
+
+const isLoading = computed(() => {
+    return lodgementsCityStore.loading === true || filtersStore.loading === true
+})
+
+const disabledSubmitButton = computed(() => {
+    if (searchInput.value.trim() === '') {
+        return true
+    }
+
+    if (searchInput.value === lodgementsCityStore.lodgementsCityName) {
+        return true
+    }
+
+    if (isLoading.value === true) {
+        return true
+    }
+
+    return false
+})
+
+const disabledResetButton = computed(() => {
+    if (filtersStore.hasChecked() === true) {
+        return false
+    }
+
+    if (searchInput.value.trim() === '') {
+        return true
+    }
+
+    if (isLoading.value === true) {
+        return true
+    }
+
+    return false
+})
+
+
 </script>
 
 <template>
     <form class="search-form" v-on:submit.prevent="submitSearch">
         <label for="search-field" class="cursor-pointer"><i class="fa-solid fa-location-dot full-center"></i></label>
-        <input type="search" name="search" id="search-field" placeholder="Marseille, France" v-model="searchInput" />
-        <button type="submit" class="cursor-pointer">
+        <input type="search" name="search" id="search-field" placeholder="Marseille, France" v-model="searchInput" :disabled="isLoading" />
+        <button type="submit" class="cursor-pointer" :disabled="disabledSubmitButton">
             <i class="fas fa-search"></i>
             <span>Rechercher</span>
         </button>
-        <button type="button" class="reset cursor-pointer" v-on:click="resetSearch">Réinitialiser</button>
+        <button
+            type="button"
+            class="reset cursor-pointer"
+            :disabled="disabledResetButton"
+            v-on:click="resetSearch">
+            Réinitialiser
+        </button>
     </form>
 </template>
 
@@ -82,14 +131,14 @@ const resetSearch = () => {
     transition: .25s;
 }
 
-
 .search-form button.reset {
     border-radius: 16px;
-    margin-left: 1px;
+    margin-left: 2px;
 }
 
-
-
+.search-form button[disabled] {
+    background: #DDD;
+}
 
 .search-form button .fa-search {
     display: none;
