@@ -11,11 +11,17 @@ services:
       - "${FRONTEND_PORT}:5173"
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - VITE_API_IMAGES_URL=http://localhost:${IMAGES_PORT}/images
+      - VITE_API_BASE_URL=http://localhost:${BACKEND_PORT}/api
     command: npm run dev -- --host 0.0.0.0
 
   backendsymfony:
     image: php-8.3
     container_name: booki-symfony
+    env_file:
+      - ./docker/postgres/.env
+    environment:
+      - POSTGRES_SERVICE_NAME=postgres
     build:
       context: ./docker/php
       dockerfile: Dockerfile
@@ -44,3 +50,15 @@ services:
       - ./backend:/app:ro
       # - ./frontend/dist:/usr/share/nginx/html
     restart: unless-stopped
+
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    container_name: booki-postgres
+    env_file:
+      - ./docker/postgres/.env
+    volumes:
+      - booki_postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  booki_postgres_data:
