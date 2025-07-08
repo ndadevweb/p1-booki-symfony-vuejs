@@ -10,7 +10,8 @@ export async function fetchLodgementsCity({ signal, page = 1, location = '' } = 
 		params.set('location', location)
 	}
 
-	const url = `${import.meta.env.VITE_API_BASE_URL}lodgements/city?${params}`
+	const url = `api/lodgements/city?${params}`
+	// const url = `${import.meta.env.VITE_API_BASE_URL}/lodgements/city?${params}`
 
 	return axios.get(url, { signal }).then(r => r.data)
 }
