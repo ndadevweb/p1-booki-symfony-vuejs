@@ -1,6 +1,6 @@
 services:
   frontendvuejs:
-    container_name: vuejs
+    container_name: booki-vuejs
     build:
       context: .
       dockerfile: docker/vuejs/Dockerfile
@@ -12,3 +12,35 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: npm run dev -- --host 0.0.0.0
+
+  backendsymfony:
+    image: php-8.3
+    container_name: booki-symfony
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+      args:
+        HOST_UID: ${HOST_UID:-1000}
+        HOST_GID: ${HOST_GID:-1000}
+    volumes:
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./backend:/app:delegated
+      # - ./backend/vendor:/app/vendor:delegated
+      # - ./backend/var:/app/var:delegated
+    expose:
+      - "9000"
+
+  nginx:
+    image: nginx:1.28
+    container_name: booki-nginx
+    depends_on:
+      - backendsymfony
+    ports:
+      - "${IMAGES_PORT}:8800"
+      - "${BACKEND_PORT}:80"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./images:/images:ro
+      - ./backend:/app:ro
+      # - ./frontend/dist:/usr/share/nginx/html
+    restart: unless-stopped

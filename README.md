@@ -1,6 +1,11 @@
 # Project Booki
 
+urls to know
 
+- http://localhost:8800/images/* (Images uploaded)
+- http://localhost:8801/ (Application front)
+- http://localhost:8802/api (API used by the Application front)
+- http://localhost:8802/management (Administration)
 
 ## Frontend VueJS
 
@@ -25,3 +30,11 @@ Build the image
 
 Then start the container
 > docker-compose up / docker-compose up -d
+
+
+## Backend Nginx
+
+
+
+## Images (Development)
+
