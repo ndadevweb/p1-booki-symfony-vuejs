@@ -1,9 +1,11 @@
+const IMAGES_URL = import.meta.env.VITE_API_IMAGES_URL
+
 const LODGEMENTS = {
   Paris: [
     {
       id: "paris1",
       url: "",
-      imageSource: "images/mock/draft-paris.png",
+      imageSource: IMAGES_URL+"/mock/draft-paris.png",
       imageTextAlt: "Draft Paris",
       title: "Hôtel Montmartre",
       price: "120€",
@@ -12,7 +14,7 @@ const LODGEMENTS = {
     {
       id: "paris2",
       url: "",
-      imageSource: "images/mock/draft-paris.png",
+      imageSource: IMAGES_URL+"/mock/draft-paris.png",
       imageTextAlt: "Draft Paris",
       title: "Auberge du Marais",
       price: "105€",
@@ -21,7 +23,7 @@ const LODGEMENTS = {
     {
       id: "paris3",
       url: "",
-      imageSource: "images/mock/draft-paris.png",
+      imageSource: IMAGES_URL+"/mock/draft-paris.png",
       imageTextAlt: "Draft Paris",
       title: "Résidence Belleville",
       price: "135€",
@@ -32,7 +34,7 @@ const LODGEMENTS = {
     {
       id: "lyon1",
       url: "",
-      imageSource: "images/mock/draft-lyon.png",
+      imageSource: IMAGES_URL+"/mock/draft-lyon.png",
       imageTextAlt: "Draft Lyon",
       title: "Villa Croix-Rousse",
       price: "110€",
@@ -41,7 +43,7 @@ const LODGEMENTS = {
     {
       id: "lyon2",
       url: "",
-      imageSource: "images/mock/draft-lyon.png",
+      imageSource: IMAGES_URL+"/mock/draft-lyon.png",
       imageTextAlt: "Draft Lyon",
       title: "Hôtel Bellecour",
       price: "98€",
@@ -50,7 +52,7 @@ const LODGEMENTS = {
     {
       id: "lyon3",
       url: "",
-      imageSource: "images/mock/draft-lyon.png",
+      imageSource: IMAGES_URL+"/mock/draft-lyon.png",
       imageTextAlt: "Draft Lyon",
       title: "Auberge Presqu'île",
       price: "87€",
@@ -61,7 +63,7 @@ const LODGEMENTS = {
     {
       id: "marseille1",
       url: "",
-      imageSource: "images/mock/draft-marseille.png",
+      imageSource: IMAGES_URL+"/mock/draft-marseille.png",
       imageTextAlt: "Draft Marseille",
       title: "Hôtel Vieux-Port",
       price: "125€",
@@ -70,7 +72,7 @@ const LODGEMENTS = {
     {
       id: "marseille2",
       url: "",
-      imageSource: "images/mock/draft-marseille.png",
+      imageSource: IMAGES_URL+"/mock/draft-marseille.png",
       imageTextAlt: "Draft Marseille",
       title: "Auberge Le Panier",
       price: "75€",
@@ -79,7 +81,7 @@ const LODGEMENTS = {
     {
       id: "marseille3",
       url: "",
-      imageSource: "images/mock/draft-marseille.png",
+      imageSource: IMAGES_URL+"/mock/draft-marseille.png",
       imageTextAlt: "Draft Marseille",
       title: "Résidence Joliette",
       price: "95€",
@@ -90,7 +92,7 @@ const LODGEMENTS = {
     {
       id: "montpellier1",
       url: "",
-      imageSource: "images/mock/draft-montpellier.png",
+      imageSource: IMAGES_URL+"/mock/draft-montpellier.png",
       imageTextAlt: "Draft Montpellier",
       title: "Hôtel Antigone",
       price: "119€",
@@ -99,7 +101,7 @@ const LODGEMENTS = {
     {
       id: "montpellier2",
       url: "",
-      imageSource: "images/mock/draft-montpellier.png",
+      imageSource: IMAGES_URL+"/mock/draft-montpellier.png",
       imageTextAlt: "Draft Montpellier",
       title: "Auberge Écusson",
       price: "88€",
@@ -108,7 +110,7 @@ const LODGEMENTS = {
     {
       id: "montpellier3",
       url: "",
-      imageSource: "images/mock/draft-montpellier.png",
+      imageSource: IMAGES_URL+"/mock/draft-montpellier.png",
       imageTextAlt: "Draft Montpellier",
       title: "Résidence Les Arceaux",
       price: "102€",

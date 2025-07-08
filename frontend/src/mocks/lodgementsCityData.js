@@ -1,3 +1,5 @@
+const IMAGES_URL = import.meta.env.VITE_API_IMAGES_URL
+
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
         const r = Math.random() * 16 | 0,
@@ -26,10 +28,10 @@ const NEIGHBORHOODS = {
 };
 
 const CITY_CONFIG = {
-    Lyon: { count: 37, imageSource: "images/mock/draft-lyon.png" },
-    Paris: { count: 11, imageSource: "images/mock/draft-paris.png" },
-    Marseille: { count: 45, imageSource: "images/mock/draft-marseille.png" },
-    Montpellier: { count: 39, imageSource: "images/mock/draft-montpellier.png" },
+    Lyon: { count: 37, imageSource: IMAGES_URL+"/mock/draft-lyon.png" },
+    Paris: { count: 11, imageSource: IMAGES_URL+"/mock/draft-paris.png" },
+    Marseille: { count: 45, imageSource: IMAGES_URL+"/mock/draft-marseille.png" },
+    Montpellier: { count: 39, imageSource: IMAGES_URL+"/mock/draft-montpellier.png" },
 };
 
 function randomFromArray(arr) {
