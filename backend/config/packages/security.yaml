@@ -4,26 +4,42 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        # app_user_provider:
+        #     entity:
+        #         class: App\Entity\UserAdmin
+        #         property: email
+        user_admin_provider:
+            entity:
+                class: App\Admin\Core\Infrastructure\Entity\UserAdmin
+                property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            lazy: true
-            provider: users_in_memory
+        # main:
+        #     lazy: true
+        #     provider: app_user_provider
+        management:
+            pattern: ^/management
+            provider: user_admin_provider
+            form_login:
+                login_path: app_authentication_admin
+                check_path: app_authentication_admin
+                default_target_path: app_management_dashboard
+            logout:
+                path: app_authentication_admin_signout
+                target: app_authentication_admin
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/management/signin, roles: PUBLIC_ACCESS }
+        - { path: ^/management, roles: ROLE_ADMIN }
 
 when@test:
     security:

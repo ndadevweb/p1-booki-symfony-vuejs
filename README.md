@@ -38,3 +38,9 @@ Then start the container
 
 ## Images (Development)
 
+
+
+## Backend symfony
+
+Check the database connection
+- symfony console doctrine:query:sql "SELECT 1"

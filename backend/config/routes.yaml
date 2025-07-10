@@ -2,4 +2,14 @@ controllers:
     resource:
         path: ../src/Controller/
         namespace: App\Controller
+        # path: ../src/Infrastructure/Controller/
+        # namespace: Infrastructure\Controller
+    type: attribute
+
+admin_dashboard_controllers:
+    resource: '../src/Admin/Dashboard/Infrastructure/Controller/'
+    type: attribute
+
+admin_authentication_controllers:
+    resource: '../src/Admin/Authentication/Infrastructure/Controller/'
     type: attribute
