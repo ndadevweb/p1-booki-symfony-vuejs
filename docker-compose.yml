@@ -60,5 +60,17 @@ services:
       - booki_postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  adminer:
+    image: adminer:4
+    container_name: booki-adminer
+    environment:
+      - ADMINER_DEFAULT_SERVER=postgres
+    ports:
+      - "${ADMINER_PORT}:8080"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+
 volumes:
   booki_postgres_data:
