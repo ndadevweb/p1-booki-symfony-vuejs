@@ -5,13 +5,20 @@ namespace App\Admin\Authentication\Infrastructure\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class AuthenticationAdminController extends AbstractController
 {
     #[Route('/management/signin', name: 'app_authentication_admin')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
+    public function login(
+        AuthenticationUtils $authenticationUtils,
+        AuthorizationCheckerInterface $authChecker
+    ): Response {
+        if ($this->getUser() && $authChecker->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_management_dashboard');
+        }
+
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -26,11 +33,6 @@ final class AuthenticationAdminController extends AbstractController
             'sign_in_label' => "Je me connecte",
             'remember_me_label' => "Se souvenir de moi"
         ]);
-
-        // return $this->render('web/management/authentication/index.html.twig', [
-            // 'last_username' => $lastUsername,
-            // 'error' => $error,
-        // ]);
     }
 
     #[Route('/management/signout', name: 'app_authentication_admin_signout')]
