@@ -3,6 +3,7 @@
 namespace App\Admin\Dashboard\Infrastructure\Controller;
 
 use App\Admin\Core\Infrastructure\Entity\UserAdmin;
+use App\Core\Infrastructure\Entity\Filter;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -47,6 +48,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Administrateurs', 'fas fa-user', UserAdmin::class);
+        yield MenuItem::linkToCrud('Filtres', 'fas fa-filter', Filter::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

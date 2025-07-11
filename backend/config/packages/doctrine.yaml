@@ -24,6 +24,11 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+            CoreInfrastructure:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Core/Infrastructure/Entity'
+                prefix: 'App\Core\Infrastructure\Entity'
             AdminCoreInfrastructure:
                 is_bundle: false
                 type: attribute
